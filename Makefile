@@ -12,3 +12,7 @@ frontend-gen-import: # make frontend-gen-import page=home import=common
 		--go_out=. --go_opt=M${import}.proto=${PREFIX}/frontend/rpc/${import} \
 		--go-grpc_out=. --go-grpc_opt=M${import}.proto=${PREFIX}/frontend/rpc/${import} \
 		../idl/frontend/${page}.proto
+
+.PHONY: service-gen
+service-gen: # make service-gen module=user
+	protoc -I idl --go_out=. --go-grpc_out=. idl/${module}.proto

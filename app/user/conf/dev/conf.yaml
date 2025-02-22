@@ -1,0 +1,9 @@
+service:
+  name: "user"
+  address: ":50051"
+
+etcd:
+  endpoints: ":2379"
+
+mysql:
+  dsn: "%s:%s@tcp(%s:3306)/user?charset=utf8mb4&parseTime=True&loc=Local"
