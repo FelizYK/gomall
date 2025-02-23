@@ -1,0 +1,29 @@
+{{ define "register" }}
+{{ template "header" . }}
+<h1 class="text-center">Sign Up</h1>
+<div class="container row p-5">
+    <div class="col-3"></div>
+    <form method="post" class="col-6" action="/auth/register">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email {{template "required.html"}}</label>
+            <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password {{template "required.html"}}</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="password-confirm" class="form-label">Password confirm {{template "required.html"}}</label>
+            <input type="password" class="form-control" id="password-confirm" name="password-confirm" required>
+        </div>
+        <div class="mb-3">
+            Already have an account, click here to <a href="/login">sign in</a>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+    </form>
+    <div class="col-3"></div>
+</div>
+{{ template "footer" . }}
+{{ end }}
