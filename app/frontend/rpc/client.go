@@ -5,6 +5,7 @@ import (
 
 	userrpc "github.com/FelizYK/gomall/rpc/user"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var (
@@ -17,7 +18,7 @@ func InitClient() {
 
 func initUserClient() {
 	userAddr := DiscoverService("user")
-	conn, err := grpc.NewClient(userAddr)
+	conn, err := grpc.Dial(userAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect user service: %v", err)
 	}

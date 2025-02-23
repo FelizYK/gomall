@@ -20,6 +20,7 @@ func main() {
 
 	rpc.InitEtcd()
 	defer rpc.CloseEtcd()
+
 	rpc.InitClient()
 
 	r.GET("/ping", func(c *gin.Context) {

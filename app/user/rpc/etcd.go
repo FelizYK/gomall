@@ -37,7 +37,7 @@ func registerService() {
 	if err != nil {
 		log.Fatalf("Failed to create lease: %v", err)
 	}
-	if _, err = cli.Put(context.TODO(), conf.GetConf().Service.Address, conf.GetConf().Service.Name, clientv3.WithLease(lease.ID)); err != nil {
+	if _, err = cli.Put(context.TODO(), conf.GetConf().Service.Name, conf.GetConf().Service.Address, clientv3.WithLease(lease.ID)); err != nil {
 		log.Fatalf("Failed to register service: %v", err)
 	}
 }

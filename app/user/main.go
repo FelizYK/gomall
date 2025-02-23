@@ -8,9 +8,9 @@ import (
 func main() {
 	repository.Init()
 
-	go rpc.InitServer()
-	defer rpc.CloseServer()
-
 	rpc.InitEtcd()
 	defer rpc.CloseEtcd()
+
+	rpc.InitServer()
+	defer rpc.CloseServer()
 }
