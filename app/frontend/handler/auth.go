@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"github.com/FelizYK/gomall/frontend/rpc/auth"
-	"github.com/FelizYK/gomall/frontend/service"
-	"github.com/FelizYK/gomall/frontend/utils"
+	"github.com/FelizYK/gomall/app/frontend/rpc/auth"
+	"github.com/FelizYK/gomall/app/frontend/service"
+	"github.com/FelizYK/gomall/app/frontend/utils"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -14,7 +14,7 @@ import (
 func Register(c *gin.Context) {
 	// bind request
 	var req auth.RegisterReq
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -32,7 +32,7 @@ func Register(c *gin.Context) {
 func Login(c *gin.Context) {
 	// bind request
 	var req auth.LoginReq
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

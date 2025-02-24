@@ -24,9 +24,9 @@ const (
 
 type RegisterReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Email           string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Password        string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	PasswordConfirm string                 `protobuf:"bytes,3,opt,name=password_confirm,json=passwordConfirm,proto3" json:"password_confirm,omitempty"`
+	Email           string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty" form:"email"`
+	Password        string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty" form:"password"`
+	PasswordConfirm string                 `protobuf:"bytes,3,opt,name=password_confirm,json=passwordConfirm,proto3" json:"password_confirm,omitempty" form:"password-confirm"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -84,9 +84,9 @@ func (x *RegisterReq) GetPasswordConfirm() string {
 
 type LoginReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Next          string                 `protobuf:"bytes,3,opt,name=next,proto3" json:"next,omitempty"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty" form:"email"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty" form:"password"`
+	Next          string                 `protobuf:"bytes,3,opt,name=next,proto3" json:"next,omitempty" query:"next"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
