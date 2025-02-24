@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/FelizYK/gomall/frontend/service"
+	"github.com/FelizYK/gomall/app/frontend/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,5 +13,5 @@ func Home(c *gin.Context) {
 		c.String(http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.HTML(http.StatusOK, "home.html", resp)
+	c.HTML(http.StatusOK, "home.html", WrapResponse(c, resp))
 }
