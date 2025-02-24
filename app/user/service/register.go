@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
+	"github.com/FelizYK/gomall/app/user/repository"
 	userrpc "github.com/FelizYK/gomall/rpc/user"
-	"github.com/FelizYK/gomall/user/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

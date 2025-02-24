@@ -1,4 +1,4 @@
-module github.com/FelizYK/gomall/user
+module github.com/FelizYK/gomall/app/user
 
 go 1.23.5
 

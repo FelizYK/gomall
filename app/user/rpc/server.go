@@ -5,9 +5,9 @@ import (
 	"log"
 	"net"
 
+	"github.com/FelizYK/gomall/app/user/conf"
+	"github.com/FelizYK/gomall/app/user/service"
 	userrpc "github.com/FelizYK/gomall/rpc/user"
-	"github.com/FelizYK/gomall/user/conf"
-	"github.com/FelizYK/gomall/user/service"
 	"google.golang.org/grpc"
 )
 

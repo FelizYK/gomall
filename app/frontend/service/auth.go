@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/FelizYK/gomall/frontend/rpc"
-	"github.com/FelizYK/gomall/frontend/rpc/auth"
+	"github.com/FelizYK/gomall/app/frontend/rpc"
+	"github.com/FelizYK/gomall/app/frontend/rpc/auth"
 	userrpc "github.com/FelizYK/gomall/rpc/user"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

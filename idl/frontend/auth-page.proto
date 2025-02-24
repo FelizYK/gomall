@@ -2,24 +2,24 @@ syntax = "proto3";
 
 package frontend.auth;
 
-import "google/protobuf/empty.proto";
-
 option go_package = "frontend/rpc/auth";
 
-service AuthService {
-  rpc register(RegisterReq) returns (google.protobuf.Empty);
-  rpc login(LoginReq) returns (google.protobuf.Empty);
-  rpc logout(google.protobuf.Empty) returns (google.protobuf.Empty);
-}
+import "google/protobuf/empty.proto";
 
 message RegisterReq {
-  string email = 1;
-  string password = 2;
-  string password_confirm = 3;
+    string email = 1;
+    string password = 2;
+    string password_confirm = 3;
 }
 
 message LoginReq {
-  string email = 1;
-  string password = 2;
-  string next = 3;
+    string email = 1;
+    string password = 2;
+    string next = 3;
+}
+
+service AuthService {
+    rpc register(RegisterReq) returns (google.protobuf.Empty);
+    rpc login(LoginReq) returns (google.protobuf.Empty);
+    rpc logout(google.protobuf.Empty) returns (google.protobuf.Empty);
 }

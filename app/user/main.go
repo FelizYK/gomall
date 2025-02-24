@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/FelizYK/gomall/user/repository"
-	"github.com/FelizYK/gomall/user/rpc"
+	"github.com/FelizYK/gomall/app/user/repository"
+	"github.com/FelizYK/gomall/app/user/rpc"
 )
 
 func main() {

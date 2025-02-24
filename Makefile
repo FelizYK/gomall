@@ -1,5 +1,3 @@
-PREFIX=github.com/FelizYK/gomall
-
 .PHONY: frontend-gen
 frontend-gen: # make frontend-gen page=home
 	cd app && \

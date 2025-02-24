@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package frontend.home;
 
-import "google/protobuf/empty.proto";
-
 option go_package = "frontend/rpc/home";
+
+import "google/protobuf/empty.proto";
 
 service HomeService {
     rpc Home(google.protobuf.Empty) returns (google.protobuf.Empty);

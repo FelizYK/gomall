@@ -1,4 +1,4 @@
-module github.com/FelizYK/gomall/frontend
+module github.com/FelizYK/gomall/app/frontend
 
 go 1.23.5
 

@@ -4,10 +4,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/FelizYK/gomall/frontend/conf"
-	"github.com/FelizYK/gomall/frontend/handler"
-	"github.com/FelizYK/gomall/frontend/router"
-	"github.com/FelizYK/gomall/frontend/rpc"
+	"github.com/FelizYK/gomall/app/frontend/conf"
+	"github.com/FelizYK/gomall/app/frontend/router"
+	"github.com/FelizYK/gomall/app/frontend/rpc"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
@@ -32,7 +31,7 @@ func main() {
 	r.LoadHTMLGlob("templates/*")
 	r.Static("assets", "./assets")
 
-	r.GET("/", handler.Home)
+	router.Home(r)
 	router.Auth(r)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
