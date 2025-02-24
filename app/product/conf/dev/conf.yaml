@@ -1,0 +1,9 @@
+service:
+  name: "product"
+  address: ":50052"
+
+etcd:
+  endpoints: ":2379"
+
+mysql:
+  dsn: "%s:%s@tcp(%s:3306)/gomall?charset=utf8mb4&parseTime=True&loc=Local"
