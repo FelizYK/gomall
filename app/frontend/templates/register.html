@@ -1,12 +1,12 @@
-{{ define "register" }}
-{{ template "header" . }}
+{{ define "register.html" }}
+{{ template "header.html" . }}
 <h1 class="text-center">Sign Up</h1>
 <div class="container row p-5">
     <div class="col-3"></div>
     <form method="post" class="col-6" action="/auth/register">
         <div class="mb-3">
             <label for="email" class="form-label">Email {{template "required.html"}}</label>
-            <input type="email" name="email" class="form-control" id="email" required>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password {{template "required.html"}}</label>
@@ -25,5 +25,5 @@
     </form>
     <div class="col-3"></div>
 </div>
-{{ template "footer" . }}
+{{ template "footer.html" . }}
 {{ end }}
