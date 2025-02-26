@@ -24,7 +24,7 @@ const (
 
 type ListProductsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty" path:"category"`
+	Category      string                 `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty" uri:"category"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -68,7 +68,7 @@ func (x *ListProductsReq) GetCategory() string {
 
 type GetProductReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" query:"id"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" form:"id"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -112,7 +112,7 @@ func (x *GetProductReq) GetId() uint32 {
 
 type SearchProductsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty" query:"query"`
+	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty" form:"query"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

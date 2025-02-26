@@ -7,7 +7,7 @@ import (
 
 func Product(r *gin.Engine) {
 	// category
-	r.GET("/category", handler.ListProductsByCategory)
+	r.GET("/category/:category", handler.ListProductsByCategory)
 	// product
 	r.GET("/product", handler.GetProduct)
 	// search
