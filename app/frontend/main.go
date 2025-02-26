@@ -44,6 +44,9 @@ func registerMiddleware(r *gin.Engine) {
 	if err != nil {
 		panic(err)
 	}
-	store.Options(sessions.Options{MaxAge: 86400})
+	store.Options(sessions.Options{
+		Path:   "/",
+		MaxAge: 86400,
+	})
 	r.Use(sessions.Sessions("feliz-shop", store))
 }
