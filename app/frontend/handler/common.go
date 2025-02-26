@@ -6,7 +6,11 @@ import (
 )
 
 func WrapResponse(c *gin.Context, resp map[string]any) map[string]any {
-	session := sessions.Default(c)
-	resp["user_id"] = session.Get("user_id")
+	resp["user_id"] = GetUserIdFromSession(c)
 	return resp
+}
+
+func GetUserIdFromSession(c *gin.Context) interface{} {
+	session := sessions.Default(c)
+	return session.Get("user_id")
 }

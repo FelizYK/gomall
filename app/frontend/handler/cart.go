@@ -11,7 +11,7 @@ import (
 // GET /cart
 func GetCart(c *gin.Context) {
 	// call service
-	resp, err := service.GetCart(c)
+	resp, err := service.GetCart(c, GetUserIdFromSession(c).(uint32))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -28,7 +28,7 @@ func AddCart(c *gin.Context) {
 		return
 	}
 	// call service
-	if err := service.AddCart(c); err != nil {
+	if err := service.AddCart(c, &req, GetUserIdFromSession(c).(uint32)); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
