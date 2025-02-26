@@ -1,20 +1,29 @@
 package service
 
 import (
+	"github.com/FelizYK/gomall/app/frontend/rpc"
+	rpcproduct "github.com/FelizYK/gomall/rpc/product"
 	"github.com/gin-gonic/gin"
 )
 
 func Home(c *gin.Context) (map[string]any, error) {
-	items := []map[string]any{
-		{"name": "t-shirt-1", "price": 100, "picture": "/assets/t-shirt-1.jpeg"},
-		{"name": "t-shirt-2", "price": 200, "picture": "/assets/t-shirt-2.jpeg"},
-		{"name": "t-shirt-3", "price": 300, "picture": "/assets/t-shirt-3.jpeg"},
-		{"name": "t-shirt-1", "price": 100, "picture": "/assets/t-shirt-1.jpeg"},
-		{"name": "t-shirt-2", "price": 200, "picture": "/assets/t-shirt-2.jpeg"},
-		{"name": "t-shirt-3", "price": 300, "picture": "/assets/t-shirt-3.jpeg"},
+	// call rpc
+	resp, err := rpc.ProductClient.ListProducts(c, &rpcproduct.ListProductsReq{})
+	if err != nil {
+		return nil, err
+	}
+	// assemble response
+	var products []map[string]any
+	for _, p := range resp.Products {
+		products = append(products, gin.H{
+			"id":          p.Id,
+			"name":        p.Name,
+			"description": p.Description,
+			"picture":     p.Picture,
+			"price":       p.Price,
+		})
 	}
 	return gin.H{
-		"cart_num": 1,
-		"items":    items,
+		"products": products,
 	}, nil
 }

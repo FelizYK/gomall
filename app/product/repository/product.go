@@ -20,6 +20,12 @@ func (u Product) TableName() string {
 	return "product"
 }
 
+func GetProducts(ctx context.Context) (products []Product, err error) {
+	err = DB.WithContext(ctx).Model(&Product{}).
+		Find(&products).Error
+	return
+}
+
 func GetProductById(ctx context.Context, id uint) (product Product, err error) {
 	err = DB.WithContext(ctx).Model(&Product{}).
 		Where("id = ?", id).First(&product).Error
