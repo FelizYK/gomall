@@ -24,6 +24,7 @@ func Home(c *gin.Context) (map[string]any, error) {
 		})
 	}
 	return gin.H{
-		"products": products,
+		"products_num": len(products),
+		"products":     products,
 	}, nil
 }
