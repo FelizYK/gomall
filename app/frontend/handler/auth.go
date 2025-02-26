@@ -12,7 +12,7 @@ import (
 
 // POST /auth/register
 func Register(c *gin.Context) {
-	// bind request
+	// bind form to request
 	var req auth.RegisterReq
 	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -30,7 +30,7 @@ func Register(c *gin.Context) {
 
 // POST /auth/login
 func Login(c *gin.Context) {
-	// bind request
+	// bind form to request
 	var req auth.LoginReq
 	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

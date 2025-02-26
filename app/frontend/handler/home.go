@@ -8,10 +8,12 @@ import (
 )
 
 func Home(c *gin.Context) {
+	// call service
 	resp, err := service.Home(c)
 	if err != nil {
-		c.String(http.StatusInternalServerError, err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	// render html
 	c.HTML(http.StatusOK, "home.html", WrapResponse(c, resp))
 }
