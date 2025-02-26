@@ -4,19 +4,19 @@ import (
 	"context"
 
 	"github.com/FelizYK/gomall/app/product/repository"
-	productrpc "github.com/FelizYK/gomall/rpc/product"
+	rpcproduct "github.com/FelizYK/gomall/rpc/product"
 )
 
-func ListProducts(ctx context.Context, req *productrpc.ListProductsReq) (resp *productrpc.ListProductsResp, err error) {
+func ListProducts(ctx context.Context, req *rpcproduct.ListProductsReq) (resp *rpcproduct.ListProductsResp, err error) {
 	// get category by name
 	category, err := repository.GetCategoryByName(ctx, req.CategoryName)
 	if err != nil {
 		return
 	}
 	// assemble products
-	resp = &productrpc.ListProductsResp{}
+	resp = &rpcproduct.ListProductsResp{}
 	for _, p := range category.Products {
-		resp.Products = append(resp.Products, &productrpc.Product{
+		resp.Products = append(resp.Products, &rpcproduct.Product{
 			Id:          uint32(p.ID),
 			Name:        p.Name,
 			Description: p.Description,

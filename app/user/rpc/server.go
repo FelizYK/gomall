@@ -7,22 +7,22 @@ import (
 
 	"github.com/FelizYK/gomall/app/user/conf"
 	"github.com/FelizYK/gomall/app/user/service"
-	userrpc "github.com/FelizYK/gomall/rpc/user"
+	rpcuser "github.com/FelizYK/gomall/rpc/user"
 	"google.golang.org/grpc"
 )
 
 type userServiceServer struct {
-	userrpc.UnimplementedUserServiceServer
+	rpcuser.UnimplementedUserServiceServer
 }
 
-func NewUserServiceServer() userrpc.UserServiceServer {
+func NewUserServiceServer() rpcuser.UserServiceServer {
 	return &userServiceServer{}
 }
 
-func (s *userServiceServer) Register(ctx context.Context, req *userrpc.RegisterReq) (*userrpc.RegisterResp, error) {
+func (s *userServiceServer) Register(ctx context.Context, req *rpcuser.RegisterReq) (*rpcuser.RegisterResp, error) {
 	return service.Register(ctx, req)
 }
-func (s *userServiceServer) Login(ctx context.Context, req *userrpc.LoginReq) (*userrpc.LoginResp, error) {
+func (s *userServiceServer) Login(ctx context.Context, req *rpcuser.LoginReq) (*rpcuser.LoginResp, error) {
 	return service.Login(ctx, req)
 }
 
@@ -37,7 +37,7 @@ func InitServer() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	userrpc.RegisterUserServiceServer(s, &userServiceServer{})
+	rpcuser.RegisterUserServiceServer(s, &userServiceServer{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

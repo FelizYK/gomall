@@ -4,11 +4,11 @@ import (
 	"context"
 
 	"github.com/FelizYK/gomall/app/user/repository"
-	userrpc "github.com/FelizYK/gomall/rpc/user"
+	rpcuser "github.com/FelizYK/gomall/rpc/user"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func Login(ctx context.Context, req *userrpc.LoginReq) (resp *userrpc.LoginResp, err error) {
+func Login(ctx context.Context, req *rpcuser.LoginReq) (resp *rpcuser.LoginResp, err error) {
 	// get user by email
 	userRow, err := repository.GetByEmail(ctx, req.Email)
 	if err != nil {
@@ -18,5 +18,5 @@ func Login(ctx context.Context, req *userrpc.LoginReq) (resp *userrpc.LoginResp,
 	if bcrypt.CompareHashAndPassword([]byte(userRow.PasswordHashed), []byte(req.Password)); err != nil {
 		return
 	}
-	return &userrpc.LoginResp{UserId: int32(userRow.ID)}, nil
+	return &rpcuser.LoginResp{UserId: int32(userRow.ID)}, nil
 }

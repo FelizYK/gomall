@@ -7,7 +7,6 @@ import (
 	"github.com/FelizYK/gomall/app/frontend/service"
 	"github.com/FelizYK/gomall/app/frontend/utils"
 	"github.com/gin-gonic/gin"
-	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // POST /auth/register
@@ -19,8 +18,7 @@ func Register(c *gin.Context) {
 		return
 	}
 	// call service
-	_, err := service.Register(c, &req)
-	if err != nil {
+	if err := service.Register(c, &req); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -37,8 +35,7 @@ func Login(c *gin.Context) {
 		return
 	}
 	// call service
-	_, err := service.Login(c, &req)
-	if err != nil {
+	if err := service.Login(c, &req); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -53,8 +50,7 @@ func Login(c *gin.Context) {
 // POST /auth/logout
 func Logout(c *gin.Context) {
 	// call service
-	_, err := service.Logout(c, &emptypb.Empty{})
-	if err != nil {
+	if err := service.Logout(c); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

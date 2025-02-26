@@ -4,19 +4,19 @@ import (
 	"context"
 
 	"github.com/FelizYK/gomall/app/product/repository"
-	productrpc "github.com/FelizYK/gomall/rpc/product"
+	rpcproduct "github.com/FelizYK/gomall/rpc/product"
 )
 
-func SearchProducts(ctx context.Context, req *productrpc.SearchProductsReq) (resp *productrpc.SearchProductsResp, err error) {
+func SearchProducts(ctx context.Context, req *rpcproduct.SearchProductsReq) (resp *rpcproduct.SearchProductsResp, err error) {
 	// search products
 	products, err := repository.SearchProducts(ctx, req.Query)
 	if err != nil {
 		return
 	}
 	// assemble products
-	resp = &productrpc.SearchProductsResp{}
+	resp = &rpcproduct.SearchProductsResp{}
 	for _, p := range products {
-		resp.Products = append(resp.Products, &productrpc.Product{
+		resp.Products = append(resp.Products, &rpcproduct.Product{
 			Id:          uint32(p.ID),
 			Name:        p.Name,
 			Description: p.Description,
