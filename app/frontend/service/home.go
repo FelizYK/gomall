@@ -14,13 +14,13 @@ func Home(c *gin.Context) (map[string]any, error) {
 	}
 	// assemble response
 	var products []map[string]any
-	for _, p := range resp.Products {
+	for _, p := range resp.GetProducts() {
 		products = append(products, gin.H{
-			"id":          p.Id,
-			"name":        p.Name,
-			"description": p.Description,
-			"picture":     p.Picture,
-			"price":       p.Price,
+			"id":          p.GetId(),
+			"name":        p.GetName(),
+			"description": p.GetDescription(),
+			"picture":     p.GetPicture(),
+			"price":       p.GetPrice(),
 		})
 	}
 	return gin.H{

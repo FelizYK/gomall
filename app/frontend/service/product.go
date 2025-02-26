@@ -10,38 +10,38 @@ import (
 func GetProduct(c *gin.Context, req *product.GetProductReq) (map[string]any, error) {
 	// call rpc
 	resp, err := rpc.ProductClient.GetProduct(c, &rpcproduct.GetProductReq{
-		Id: req.Id,
+		Id: req.GetId(),
 	})
 	if err != nil {
 		return nil, err
 	}
 	// assemble response
 	return gin.H{
-		"id":          resp.Product.Id,
-		"name":        resp.Product.Name,
-		"description": resp.Product.Description,
-		"picture":     resp.Product.Picture,
-		"price":       resp.Product.Price,
+		"id":          resp.GetProduct().GetId(),
+		"name":        resp.GetProduct().GetName(),
+		"description": resp.GetProduct().GetDescription(),
+		"picture":     resp.GetProduct().GetPicture(),
+		"price":       resp.GetProduct().GetPrice(),
 	}, nil
 }
 
 func ListProductsByCategory(c *gin.Context, req *product.ListProductsReq) (map[string]any, error) {
 	// call rpc
 	resp, err := rpc.ProductClient.ListProducts(c, &rpcproduct.ListProductsReq{
-		CategoryName: req.Category,
+		CategoryName: req.GetCategory(),
 	})
 	if err != nil {
 		return nil, err
 	}
 	// assemble response
 	var products []map[string]any
-	for _, p := range resp.Products {
+	for _, p := range resp.GetProducts() {
 		products = append(products, gin.H{
-			"id":          p.Id,
-			"name":        p.Name,
-			"description": p.Description,
-			"picture":     p.Picture,
-			"price":       p.Price,
+			"id":          p.GetId(),
+			"name":        p.GetName(),
+			"description": p.GetDescription(),
+			"picture":     p.GetPicture(),
+			"price":       p.GetPrice(),
 		})
 	}
 	return gin.H{
@@ -52,24 +52,24 @@ func ListProductsByCategory(c *gin.Context, req *product.ListProductsReq) (map[s
 func SearchProducts(c *gin.Context, req *product.SearchProductsReq) (map[string]any, error) {
 	// call rpc
 	resp, err := rpc.ProductClient.SearchProducts(c, &rpcproduct.SearchProductsReq{
-		Query: req.Query,
+		Query: req.GetQuery(),
 	})
 	if err != nil {
 		return nil, err
 	}
 	// assemble response
 	var products []map[string]any
-	for _, p := range resp.Products {
+	for _, p := range resp.GetProducts() {
 		products = append(products, gin.H{
-			"id":          p.Id,
-			"name":        p.Name,
-			"description": p.Description,
-			"picture":     p.Picture,
-			"price":       p.Price,
+			"id":          p.GetId(),
+			"name":        p.GetName(),
+			"description": p.GetDescription(),
+			"picture":     p.GetPicture(),
+			"price":       p.GetPrice(),
 		})
 	}
 	return gin.H{
-		"query":    req.Query,
+		"query":    req.GetQuery(),
 		"products": products,
 	}, nil
 }
