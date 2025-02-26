@@ -50,8 +50,8 @@
                             <a class="nav-link" href="/about">About</a>
                         </li>
                         <form class="d-flex ms-auto" role="search" action="/search" method="get">
-                            <input class="form-control me-2" type="search" name="q" placeholder="Search"
-                                aria-label="Search" value="{{ .q }}">
+                            <input class="form-control me-2" type="search" name="search" placeholder="Search"
+                                aria-label="Search" value="{{ .query }}">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                         {{ if .user_id }}

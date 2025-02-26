@@ -1,0 +1,15 @@
+{{ define "search.html" }}
+{{ template "header.html" . }}
+{{ if .query }}
+<div class="d-inline-block border border-success rounded-4 p-1 ps-4 pe-4">
+    <div>
+        {{ .query }}
+        <a href="/" class="ps-4">
+            <button type="button" class="btn btn-sm btn-danger" aria-label="Close">X</button>
+        </a>
+    </div>
+</div>
+{{ end }}
+{{ template "products-list.html" . }}
+{{ template "footer.html" . }}
+{{ end }}

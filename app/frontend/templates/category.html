@@ -1,6 +1,6 @@
-{{ define "home.html" }}
+{{ define "category.html" }}
 {{ template "header.html" . }}
-<h1 class="text-center">Hot Sale</h1>
+<h1 class="text-center">{{ .category }}</h1>
 {{ template "products-list.html" . }}
 {{ template "footer.html" . }}
 {{ end }}
