@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"context"
+
 	"gorm.io/gorm"
 )
 
@@ -14,4 +16,10 @@ type Category struct {
 
 func (u Category) TableName() string {
 	return "category"
+}
+
+func GetCategoryByName(ctx context.Context, name string) (category Category, err error) {
+	err = DB.WithContext(ctx).Model(&Category{}).
+		Where("name = ?", name).Preload("Products").First(&category).Error
+	return
 }
