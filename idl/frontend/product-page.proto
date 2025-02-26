@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package frontend.product;
+
+option go_package = "frontend/rpc/product";
+
+import "google/protobuf/empty.proto";
+
+message ListProductsReq {
+    string category = 1;
+}
+
+message GetProductReq {
+    uint32 id = 1;
+}
+  
+message SearchProductsReq {
+    string query = 1;
+}
+  
+service ProductService {
+    rpc ListProducts(ListProductsReq) returns (google.protobuf.Empty);
+    rpc GetProduct(GetProductReq) returns (google.protobuf.Empty);
+    rpc SearchProducs(SearchProductsReq) returns (google.protobuf.Empty);
+}
