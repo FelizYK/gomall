@@ -19,7 +19,7 @@ message LoginReq {
 }
 
 service AuthService {
-    rpc register(RegisterReq) returns (google.protobuf.Empty);
-    rpc login(LoginReq) returns (google.protobuf.Empty);
-    rpc logout(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc Register(RegisterReq) returns (google.protobuf.Empty);
+    rpc Login(LoginReq) returns (google.protobuf.Empty);
+    rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty);
 }

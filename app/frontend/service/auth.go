@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Register(c *gin.Context, req *auth.RegisterReq) error {
+func Register(c *gin.Context, req *auth.RegisterReq) (err error) {
 	// call rpc
 	resp, err := rpc.UserClient.Register(c, &rpcuser.RegisterReq{
 		Email:           req.GetEmail(),
@@ -21,13 +21,11 @@ func Register(c *gin.Context, req *auth.RegisterReq) error {
 	// session
 	session := sessions.Default(c)
 	session.Set("user_id", resp.GetUserId())
-	if err = session.Save(); err != nil {
-		return err
-	}
-	return nil
+	err = session.Save()
+	return
 }
 
-func Login(c *gin.Context, req *auth.LoginReq) error {
+func Login(c *gin.Context, req *auth.LoginReq) (err error) {
 	// call rpc
 	resp, err := rpc.UserClient.Login(c, &rpcuser.LoginReq{
 		Email:    req.GetEmail(),
@@ -39,18 +37,14 @@ func Login(c *gin.Context, req *auth.LoginReq) error {
 	// session
 	session := sessions.Default(c)
 	session.Set("user_id", resp.GetUserId())
-	if err = session.Save(); err != nil {
-		return err
-	}
-	return nil
+	err = session.Save()
+	return
 }
 
-func Logout(c *gin.Context) error {
+func Logout(c *gin.Context) (err error) {
 	// session
 	session := sessions.Default(c)
 	session.Clear()
-	if err := session.Save(); err != nil {
-		return err
-	}
-	return nil
+	err = session.Save()
+	return
 }
