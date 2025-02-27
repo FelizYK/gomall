@@ -25,6 +25,9 @@ func (s *userServiceServer) Register(ctx context.Context, req *rpcuser.RegisterR
 func (s *userServiceServer) Login(ctx context.Context, req *rpcuser.LoginReq) (*rpcuser.LoginResp, error) {
 	return service.Login(ctx, req)
 }
+func (s *userServiceServer) GetUser(ctx context.Context, req *rpcuser.GetUserReq) (*rpcuser.GetUserResp, error) {
+	return service.GetUser(ctx, req)
+}
 
 var (
 	lis net.Listener

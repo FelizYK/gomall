@@ -16,11 +16,19 @@ func (u User) TableName() string {
 	return "user"
 }
 
+func GetById(ctx context.Context, id uint) (user *User, err error) {
+	err = DB.WithContext(ctx).Model(&User{}).
+		Where("id = ?", id).First(&user).Error
+	return
+}
+
 func GetByEmail(ctx context.Context, email string) (user *User, err error) {
-	err = DB.WithContext(ctx).Model(&User{}).Where(&User{Email: email}).First(&user).Error
+	err = DB.WithContext(ctx).Model(&User{}).
+		Where("email = ?", email).First(&user).Error
 	return
 }
 
 func Create(ctx context.Context, user *User) error {
-	return DB.WithContext(ctx).Create(user).Error
+	return DB.WithContext(ctx).
+		Create(user).Error
 }
