@@ -1,0 +1,107 @@
+{{ define "checkout.html" }}
+{{ template "header.html" . }}
+<div class="row mb-5">
+    <div class="col-lg-8 col-sm-12">
+        <form method="post" action="/checkout/waiting">
+
+            <h4 class="mb-3 mt-3">Contact</h4>
+            <label for="email" class="col-12 form-label">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" aria-label="email"
+                    value="abc@example.com">
+            </label>
+
+            <h4 class="mb-3 mt-3">Delivery</h4>
+            <div class="mb-3 mt-3 col-12 row">
+                <label for="firstname" class="col-md-6 col-sm-12">
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name"
+                        value="world">
+                </label>
+                <label for="lastname" class="col-md-6 col-sm-12">
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name"
+                        value="hello">
+                </label>
+            </div>
+            <label for="street" class="mb-3 mt-3 col-12 form-label">
+                <input type="text" class="form-control" id="street" name="street" placeholder="Street"
+                    value="7th street">
+            </label>
+            <div class="mb-3 mt-3 col-12 row">
+                <label for="city" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value="hangzhou">
+                </label>
+                <label for="province" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="province" name="province" placeholder="Province"
+                        value="zhejiang">
+                </label>
+                <label for="country" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Country"
+                        value="china">
+                </label>
+            </div>
+
+            <h4 class="mb-3 mt-3">
+                Payment
+            </h4>
+            <label for="card-num" class="col-12 form-label">
+                <input type="text" class="form-control" id="card-num" name="cardNum" placeholder="Card number"
+                    value="424242424242424242">
+            </label>
+            <div class="mb-3 mt-3 col-12 row">
+                <label for="expiration-month" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="expiration-month" name="expirationMonth"
+                        placeholder="Expiration Month" value="12">
+                </label>
+                <label for="expiration-year" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="expiration-year" name="expirationYear"
+                        placeholder="Expiration Year" value="2030">
+                </label>
+                <label for="cvv" class="col-md-4 col-sm-12">
+                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="cvv" required>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="card" value="card" checked>
+                <label class="form-check-label" for="card">
+                    Card
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="stripe" value="stripe" disabled>
+                <label class="form-check-label" for="stripe">
+                    Stripe
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="paypal" value="paypal" disabled>
+                <label class="form-check-label" for="paypal">
+                    Paypal
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="wechat" value="wechat" disabled>
+                <label class="form-check-label" for="wechat">
+                    Wechat
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment" id="alipay" value="alipay" disabled>
+                <label class="form-check-label" for="alipay">
+                    Alipay
+                </label>
+            </div>
+
+            <div class="mt-3 mb-3">
+                <div class="float-end">
+                    <div class="m-3 text-danger">Total: ${{ .total }}</div>
+                    <input type="submit" class="btn btn-success" value="Pay">
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <ul class="list-group col-lg-4 col-sm-12">
+        {{ template "cart-list.html" . }}
+    </ul>
+</div>
+{{ template "footer.html" . }}
+{{ end }}
