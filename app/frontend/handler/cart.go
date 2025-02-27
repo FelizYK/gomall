@@ -22,6 +22,7 @@ func GetCart(c *gin.Context) {
 
 // POST /cart
 func AddCart(c *gin.Context) {
+	// bind form to request
 	var req cart.AddCartReq
 	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
