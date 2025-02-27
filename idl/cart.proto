@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package cart;
+
+option go_package = 'rpc/cart';
+
+import "google/protobuf/empty.proto";
+
+service CartService {
+    rpc GetCart(GetCartReq) returns (GetCartResp);
+    rpc AddCart(AddCartReq) returns (google.protobuf.Empty);
+    rpc EmptyCart(EmptyCartReq) returns (google.protobuf.Empty);
+}
+
+message CartItem {
+    uint32 productId = 1;
+    int32 quantity = 2;
+}
+
+message GetCartReq {
+    uint32 userId = 1;
+}
+
+message GetCartResp {
+    repeated CartItem items = 1;
+}
+
+message AddCartReq {
+    uint32 user_id = 1;
+    CartItem item = 2;
+}
+
+message EmptyCartReq {
+    uint32 userId = 1;
+}
