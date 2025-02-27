@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package frontend.checkout;
+
+option go_package = "frontend/rpc/checkout";
+
+import "google/protobuf/empty.proto";
+
+message CheckoutReq {
+    string email = 1;
+    string firstname = 2;
+    string lastname = 3;
+    string street = 4;
+    string city = 5;
+    string province = 6;
+    string country = 7;
+    string card_num = 8;
+    int32 expiration_month = 9;
+    int32 expiration_year = 10;
+    int32 cvv = 11;
+    string payment = 12;
+}
+
+service CartService {
+    rpc Checkout(CheckoutReq) returns (google.protobuf.Empty);
+}
