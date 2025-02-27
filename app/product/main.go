@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/FelizYK/gomall/app/product/repository"
 	"github.com/FelizYK/gomall/app/product/rpc"
+	"github.com/FelizYK/gomall/app/product/rpc/server"
 )
 
 func main() {
@@ -11,6 +12,6 @@ func main() {
 	rpc.InitEtcd()
 	defer rpc.CloseEtcd()
 
-	rpc.InitServer()
-	defer rpc.CloseServer()
+	server.InitServer()
+	defer server.CloseServer()
 }
