@@ -16,7 +16,7 @@ func (u User) TableName() string {
 	return "user"
 }
 
-func GetById(ctx context.Context, id uint) (user *User, err error) {
+func GetById(ctx context.Context, id uint32) (user *User, err error) {
 	err = DB.WithContext(ctx).Model(&User{}).
 		Where("id = ?", id).First(&user).Error
 	return

@@ -26,7 +26,7 @@ func GetProducts(ctx context.Context) (products []Product, err error) {
 	return
 }
 
-func GetProductById(ctx context.Context, id uint) (product Product, err error) {
+func GetProductById(ctx context.Context, id uint32) (product Product, err error) {
 	err = DB.WithContext(ctx).Model(&Product{}).
 		Where("id = ?", id).First(&product).Error
 	return

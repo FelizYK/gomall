@@ -11,7 +11,7 @@ func EmptyCart(ctx context.Context, req *rpccart.EmptyCartReq) (err error) {
 	// check user exists
 	err = CheckUser(ctx, req.UserId)
 	// empty cart by user_id
-	err = repository.EmptyCart(ctx, uint(req.UserId))
+	err = repository.EmptyCart(ctx, req.UserId)
 	if err != nil {
 		return
 	}

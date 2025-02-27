@@ -11,7 +11,7 @@ func GetCart(ctx context.Context, req *rpccart.GetCartReq) (resp *rpccart.GetCar
 	// check user exists
 	err = CheckUser(ctx, req.UserId)
 	// get cart_items by user_id
-	items, err := repository.GetCartByUserId(ctx, uint(req.UserId))
+	items, err := repository.GetCartByUserId(ctx, req.UserId)
 	if err != nil {
 		return
 	}

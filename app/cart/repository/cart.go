@@ -9,22 +9,22 @@ import (
 
 type CartItem struct {
 	gorm.Model
-	UserId    uint
-	ProductId uint
-	Quantity  int
+	UserId    uint32
+	ProductId uint32
+	Quantity  int32
 }
 
 func (u CartItem) TableName() string {
 	return "CartItem"
 }
 
-func GetCartByUserId(ctx context.Context, userId uint) (items []CartItem, err error) {
+func GetCartByUserId(ctx context.Context, userId uint32) (items []CartItem, err error) {
 	err = DB.WithContext(ctx).Model(&CartItem{}).
 		Where("user_id = ?", userId).Find(&items).Error
 	return
 }
 
-func AddCart(ctx context.Context, userId uint, productId uint, quantity int) (err error) {
+func AddCart(ctx context.Context, userId uint32, productId uint32, quantity int32) (err error) {
 	var find CartItem
 	err = DB.WithContext(ctx).Model(&CartItem{}).
 		Where("user_id = ? AND product_id = ?", userId, productId).First(&find).Error
@@ -48,7 +48,7 @@ func AddCart(ctx context.Context, userId uint, productId uint, quantity int) (er
 	return
 }
 
-func EmptyCart(ctx context.Context, userId uint) (err error) {
+func EmptyCart(ctx context.Context, userId uint32) (err error) {
 	err = DB.WithContext(ctx).Model(&CartItem{}).
 		Where("user_id = ?", userId).Delete(&CartItem{}).Error
 	return

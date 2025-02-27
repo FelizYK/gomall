@@ -19,7 +19,7 @@ func AddCart(ctx context.Context, req *rpccart.AddCartReq) (err error) {
 		return
 	}
 	// add cart_item
-	err = repository.AddCart(ctx, uint(req.UserId), uint(req.Item.ProductId), int(req.Item.Quantity))
+	err = repository.AddCart(ctx, req.UserId, req.Item.ProductId, req.Item.Quantity)
 	if err != nil {
 		return
 	}
