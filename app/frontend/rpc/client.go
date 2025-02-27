@@ -4,6 +4,7 @@ import (
 	"log"
 
 	rpccart "github.com/FelizYK/gomall/rpc/cart"
+	rpccheckout "github.com/FelizYK/gomall/rpc/checkout"
 	rpcproduct "github.com/FelizYK/gomall/rpc/product"
 	rpcuser "github.com/FelizYK/gomall/rpc/user"
 	"google.golang.org/grpc"
@@ -11,15 +12,17 @@ import (
 )
 
 var (
-	UserClient    rpcuser.UserServiceClient
-	ProductClient rpcproduct.ProductServiceClient
-	CartClient    rpccart.CartServiceClient
+	UserClient     rpcuser.UserServiceClient
+	ProductClient  rpcproduct.ProductServiceClient
+	CartClient     rpccart.CartServiceClient
+	CheckoutClient rpccheckout.CheckoutServiceClient
 )
 
 func InitClient() {
 	initUserClient()
 	initProductClient()
 	initCartClient()
+	initCheckoutClient()
 }
 
 func initUserClient() {
@@ -47,4 +50,13 @@ func initCartClient() {
 		log.Fatalf("Failed to connect cart service: %v", err)
 	}
 	CartClient = rpccart.NewCartServiceClient(conn)
+}
+
+func initCheckoutClient() {
+	checkoutAddr := DiscoverService("checkout")
+	conn, err := grpc.Dial(checkoutAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Fatalf("Failed to connect checkout service: %v", err)
+	}
+	CheckoutClient = rpccheckout.NewCheckoutServiceClient(conn)
 }
