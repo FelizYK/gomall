@@ -15,8 +15,8 @@ func Login(ctx context.Context, req *rpcuser.LoginReq) (resp *rpcuser.LoginResp,
 		return
 	}
 	// check password
-	if bcrypt.CompareHashAndPassword([]byte(userRow.PasswordHashed), []byte(req.Password)); err != nil {
+	if err = bcrypt.CompareHashAndPassword([]byte(userRow.PasswordHashed), []byte(req.Password)); err != nil {
 		return
 	}
-	return &rpcuser.LoginResp{UserId: int32(userRow.ID)}, nil
+	return &rpcuser.LoginResp{UserId: uint32(userRow.ID)}, nil
 }

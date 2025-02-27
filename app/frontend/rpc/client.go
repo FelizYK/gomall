@@ -13,7 +13,7 @@ import (
 var (
 	UserClient    rpcuser.UserServiceClient
 	ProductClient rpcproduct.ProductServiceClient
-	CartClient    rpcproduct.CartServiceClient
+	CartClient    rpccart.CartServiceClient
 )
 
 func InitClient() {

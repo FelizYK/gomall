@@ -28,5 +28,5 @@ func Register(ctx context.Context, req *rpcuser.RegisterReq) (resp *rpcuser.Regi
 	if err = repository.Create(ctx, newUser); err != nil {
 		return
 	}
-	return &rpcuser.RegisterResp{UserId: int32(newUser.ID)}, nil
+	return &rpcuser.RegisterResp{UserId: uint32(newUser.ID)}, nil
 }
