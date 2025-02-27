@@ -11,16 +11,16 @@ import (
 func Register(c *gin.Context, req *auth.RegisterReq) (err error) {
 	// call rpc
 	resp, err := rpc.UserClient.Register(c, &rpcuser.RegisterReq{
-		Email:           req.GetEmail(),
-		Password:        req.GetPassword(),
-		PasswordConfirm: req.GetPasswordConfirm(),
+		Email:           req.Email,
+		Password:        req.Password,
+		PasswordConfirm: req.PasswordConfirm,
 	})
 	if err != nil {
 		return err
 	}
 	// session
 	session := sessions.Default(c)
-	session.Set("user_id", resp.GetUserId())
+	session.Set("user_id", resp.UserId)
 	err = session.Save()
 	return
 }
@@ -28,15 +28,15 @@ func Register(c *gin.Context, req *auth.RegisterReq) (err error) {
 func Login(c *gin.Context, req *auth.LoginReq) (err error) {
 	// call rpc
 	resp, err := rpc.UserClient.Login(c, &rpcuser.LoginReq{
-		Email:    req.GetEmail(),
-		Password: req.GetPassword(),
+		Email:    req.Email,
+		Password: req.Password,
 	})
 	if err != nil {
 		return err
 	}
 	// session
 	session := sessions.Default(c)
-	session.Set("user_id", resp.GetUserId())
+	session.Set("user_id", resp.UserId)
 	err = session.Save()
 	return
 }

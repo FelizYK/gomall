@@ -41,8 +41,8 @@ func Login(c *gin.Context) {
 	}
 	// redirect
 	redirect := "/"
-	if utils.ValidateNext(req.GetNext()) {
-		redirect = req.GetNext()
+	if utils.ValidateNext(req.Next) {
+		redirect = req.Next
 	}
 	c.Redirect(http.StatusFound, redirect)
 }

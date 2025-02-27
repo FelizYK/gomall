@@ -19,21 +19,20 @@ func GetCart(c *gin.Context, userId uint32) (map[string]any, error) {
 	// assemble response
 	var products []map[string]any
 	var total float32
-	for _, item := range resp.GetItems() {
-		respP, err := rpc.ProductClient.GetProduct(c, &rpcproduct.GetProductReq{
-			Id: item.GetProductId(),
+	for _, item := range resp.Items {
+		p, err := rpc.ProductClient.GetProduct(c, &rpcproduct.GetProductReq{
+			Id: item.ProductId,
 		})
-		if err != nil || respP.GetProduct() == nil {
+		if err != nil || p.Product == nil {
 			continue
 		}
-		p := respP.GetProduct()
 		products = append(products, gin.H{
-			"name":     p.GetName(),
-			"picture":  p.GetPicture(),
-			"price":    p.GetPrice(),
-			"quantity": item.GetQuantity(),
+			"name":     p.Product.Name,
+			"picture":  p.Product.Picture,
+			"price":    p.Product.Price,
+			"quantity": item.Quantity,
 		})
-		total += p.GetPrice() * float32(item.GetQuantity())
+		total += p.Product.Price * float32(item.Quantity)
 	}
 	return gin.H{
 		"products": products,
@@ -46,8 +45,8 @@ func AddCart(c *gin.Context, req *cart.AddCartReq, userId uint32) (err error) {
 	_, err = rpc.CartClient.AddCart(c, &rpccart.AddCartReq{
 		UserId: userId,
 		Item: &rpccart.CartItem{
-			ProductId: req.GetProductId(),
-			Quantity:  req.GetQuantity(),
+			ProductId: req.ProductId,
+			Quantity:  req.Quantity,
 		},
 	})
 	return

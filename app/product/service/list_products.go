@@ -8,7 +8,7 @@ import (
 )
 
 func ListProducts(ctx context.Context, req *rpcproduct.ListProductsReq) (resp *rpcproduct.ListProductsResp, err error) {
-	if req.GetCategoryName() == "" {
+	if req.CategoryName == "" {
 		return getProducts(ctx)
 	} else {
 		return getProductsByCategory(ctx, req)

@@ -9,9 +9,9 @@ import (
 
 func EmptyCart(ctx context.Context, req *rpccart.EmptyCartReq) (err error) {
 	// check user exists
-	err = CheckUser(ctx, req.GetUserId())
+	err = CheckUser(ctx, req.UserId)
 	// empty cart by user_id
-	err = repository.EmptyCart(ctx, uint(req.GetUserId()))
+	err = repository.EmptyCart(ctx, uint(req.UserId))
 	if err != nil {
 		return
 	}
