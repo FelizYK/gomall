@@ -10,11 +10,14 @@ service CheckoutService {
     rpc Checkout(CheckoutReq) returns (google.protobuf.Empty);
 }
 
-message Address {
-    string street = 1;
-    string city = 2;
-    string province = 3;
-    string country = 4;
+message Consignee {
+    string email = 1;
+    string firstname = 2;
+    string lastname = 3;
+    string street = 4;
+    string city = 5;
+    string province = 6;
+    string country = 7;
 }
 
 message CreditCard {
@@ -26,9 +29,6 @@ message CreditCard {
 
 message CheckoutReq {
     uint32 user_id = 1;
-    string email = 2;
-    string firstname = 3;
-    string lastname = 4;
-    Address address = 5;
-    CreditCard credit_card = 6;
+    Consignee consignee = 2;
+    CreditCard credit_card = 3;
 }

@@ -17,15 +17,15 @@ func Checkout(c *gin.Context, req *checkout.CheckoutReq) (err error) {
 	}
 	// call rpc
 	_, err = rpc.CheckoutClient.Checkout(c, &rpccheckout.CheckoutReq{
-		UserId:    userId,
-		Email:     req.Email,
-		Firstname: req.Firstname,
-		Lastname:  req.Lastname,
-		Address: &rpccheckout.Address{
-			Street:   req.Street,
-			City:     req.City,
-			Province: req.Province,
-			Country:  req.Country,
+		UserId: userId,
+		Consignee: &rpccheckout.Consignee{
+			Email:     req.Email,
+			Firstname: req.Firstname,
+			Lastname:  req.Lastname,
+			Street:    req.Street,
+			City:      req.City,
+			Province:  req.Province,
+			Country:   req.Country,
 		},
 		CreditCard: &rpccheckout.CreditCard{
 			CardNum:         req.CardNum,
