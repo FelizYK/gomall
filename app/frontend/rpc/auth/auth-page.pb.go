@@ -26,7 +26,7 @@ type RegisterReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Email           string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty" form:"email"`
 	Password        string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty" form:"password"`
-	PasswordConfirm string                 `protobuf:"bytes,3,opt,name=password_confirm,json=passwordConfirm,proto3" json:"password_confirm,omitempty" form:"password-confirm"`
+	PasswordConfirm string                 `protobuf:"bytes,3,opt,name=password_confirm,json=passwordConfirm,proto3" json:"password_confirm,omitempty" form:"password_confirm"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
