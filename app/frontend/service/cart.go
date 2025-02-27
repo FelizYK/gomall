@@ -1,6 +1,8 @@
 package service
 
 import (
+	"strconv"
+
 	"github.com/FelizYK/gomall/app/frontend/rpc"
 	"github.com/FelizYK/gomall/app/frontend/rpc/cart"
 	rpccart "github.com/FelizYK/gomall/rpc/cart"
@@ -36,7 +38,7 @@ func GetCart(c *gin.Context, userId uint32) (map[string]any, error) {
 	}
 	return gin.H{
 		"products": products,
-		"total":    total,
+		"total":    strconv.FormatFloat(float64(total), 'f', 2, 32),
 	}, nil
 }
 
