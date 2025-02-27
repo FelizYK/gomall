@@ -11,13 +11,13 @@ import (
 // GET /cart
 func GetCart(c *gin.Context) {
 	// call service
-	resp, err := service.GetCart(c, GetUserIdFromSession(c).(uint32))
+	resp, err := service.GetCart(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "cart.html", WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "cart.html", service.WrapResponse(c, resp))
 }
 
 // POST /cart
@@ -28,7 +28,7 @@ func AddCart(c *gin.Context) {
 		return
 	}
 	// call service
-	if err := service.AddCart(c, &req, GetUserIdFromSession(c).(uint32)); err != nil {
+	if err := service.AddCart(c, &req); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

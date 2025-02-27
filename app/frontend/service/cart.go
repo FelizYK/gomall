@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"strconv"
 
 	"github.com/FelizYK/gomall/app/frontend/rpc"
@@ -10,7 +11,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetCart(c *gin.Context, userId uint32) (map[string]any, error) {
+func GetCart(c *gin.Context) (map[string]any, error) {
+	// get user_id
+	userId := getUserIdFromSession(c)
+	if userId == 0 {
+		return gin.H{}, nil
+	}
 	// call rpc
 	resp, err := rpc.CartClient.GetCart(c, &rpccart.GetCartReq{
 		UserId: userId,
@@ -42,7 +48,12 @@ func GetCart(c *gin.Context, userId uint32) (map[string]any, error) {
 	}, nil
 }
 
-func AddCart(c *gin.Context, req *cart.AddCartReq, userId uint32) (err error) {
+func AddCart(c *gin.Context, req *cart.AddCartReq) (err error) {
+	// get user_id
+	userId := getUserIdFromSession(c)
+	if userId == 0 {
+		return errors.New("user not login")
+	}
 	// call rpc
 	_, err = rpc.CartClient.AddCart(c, &rpccart.AddCartReq{
 		UserId: userId,
