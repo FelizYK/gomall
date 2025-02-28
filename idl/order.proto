@@ -34,7 +34,7 @@ message CreditCard {
 
 message OrderItem {
     uint32 product_id = 1;
-    uint32 quantity = 2;
+    int32 quantity = 2;
     float cost = 3;
 }
 

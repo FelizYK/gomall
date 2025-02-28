@@ -31,7 +31,10 @@ func GetCart(c *gin.Context) (map[string]any, error) {
 		p, err := rpc.ProductClient.GetProduct(c, &rpcproduct.GetProductReq{
 			Id: item.ProductId,
 		})
-		if err != nil || p.Product == nil {
+		if err != nil {
+			return nil, err
+		}
+		if p.Product == nil {
 			continue
 		}
 		products = append(products, gin.H{
