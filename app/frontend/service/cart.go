@@ -15,7 +15,7 @@ func GetCart(c *gin.Context) (map[string]any, error) {
 	// get user_id
 	userId := getUserIdFromSession(c)
 	if userId == 0 {
-		return gin.H{}, nil
+		return nil, nil
 	}
 	// call rpc
 	resp, err := rpc.CartClient.GetCart(c, &rpccart.GetCartReq{
