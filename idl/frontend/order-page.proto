@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package frontend.order;
+
+option go_package = "frontend/rpc/order";
+
+import "google/protobuf/empty.proto";
+
+service OrderService {
+    rpc GetOrders(google.protobuf.Empty) returns (google.protobuf.Empty);
+}

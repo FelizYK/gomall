@@ -36,6 +36,7 @@ func main() {
 	router.Product(r)
 	router.Cart(r)
 	router.Checkout(r)
+	router.Order(r)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

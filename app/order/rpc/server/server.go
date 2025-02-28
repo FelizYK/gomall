@@ -20,6 +20,9 @@ func NewOrderServiceServer() rpcorder.OrderServiceServer {
 	return &orderServiceServer{}
 }
 
+func (s *orderServiceServer) GetOrders(ctx context.Context, req *rpcorder.GetOrdersReq) (*rpcorder.GetOrdersResp, error) {
+	return service.GetOrders(ctx, req)
+}
 func (s *orderServiceServer) AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (*emptypb.Empty, error) {
 	return &emptypb.Empty{}, service.AddOrder(ctx, req)
 }
