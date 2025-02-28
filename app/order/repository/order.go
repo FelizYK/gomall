@@ -38,21 +38,12 @@ func (u Order) TableName() string {
 
 func GetOrders(ctx context.Context, userId uint32) (orders []*Order, err error) {
 	err = DB.WithContext(ctx).Model(&Order{}).
-		Where("user_id = ?", userId).Find(&orders).Error
+		Where("user_id = ?", userId).Preload("OrderItems").Find(&orders).Error
 	return
 }
 
-func AddOrder(ctx context.Context, order *Order, orderItems []*OrderItem) error {
-	return DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
-		if err := tx.Create(order).Error; err != nil {
-			return err
-		}
-		for _, item := range orderItems {
-			item.OrderIdRefer = order.Model.ID
-		}
-		if err := tx.Create(&orderItems).Error; err != nil {
-			return err
-		}
-		return nil
-	})
+func AddOrder(ctx context.Context, order *Order) (err error) {
+	err = DB.WithContext(ctx).Model(&Order{}).
+		Create(order).Error
+	return
 }

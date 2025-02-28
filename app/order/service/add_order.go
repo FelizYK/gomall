@@ -24,7 +24,7 @@ func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 		return
 	}
 	// assemble order
-	var orderItems []*repository.OrderItem
+	var orderItems []repository.OrderItem
 	var totalCost float32
 	for _, item := range cartResp.Items {
 		// get product by product_id
@@ -40,7 +40,7 @@ func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 			return
 		}
 		cost := float32(item.Quantity) * productResp.Product.Price
-		orderItems = append(orderItems, &repository.OrderItem{
+		orderItems = append(orderItems, repository.OrderItem{
 			ProductId: item.ProductId,
 			Quantity:  item.Quantity,
 			Cost:      cost,
@@ -64,9 +64,10 @@ func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 			ExpirationYear:  req.CreditCard.ExpirationYear,
 			Cvv:             req.CreditCard.Cvv,
 		},
-		TotalCost: totalCost,
+		TotalCost:  totalCost,
+		OrderItems: orderItems,
 	}
-	err = repository.AddOrder(ctx, order, orderItems)
+	err = repository.AddOrder(ctx, order)
 	if err != nil {
 		return
 	}
