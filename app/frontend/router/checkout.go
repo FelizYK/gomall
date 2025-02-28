@@ -7,7 +7,7 @@ import (
 
 func Checkout(r *gin.Engine) {
 	// checkout
-	r.GET("/cart", handler.CheckoutPage)
+	r.GET("/checkout", handler.CheckoutPage)
 	// pay
-	r.POST("/cart", handler.Checkout)
+	r.POST("/checkout", handler.Checkout)
 }
