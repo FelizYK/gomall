@@ -1,5 +1,5 @@
 service:
-  name: "checkout"
+  name: "order"
   address: ":50054"
 
 etcd:

@@ -20,19 +20,19 @@ func initClient() {
 }
 
 func initCartClient() {
-	userAddr := discoverService("cart")
-	conn, err := grpc.Dial(userAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	cartAddr := discoverService("cart")
+	conn, err := grpc.Dial(cartAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("Failed to connect user service: %v", err)
+		log.Fatalf("Failed to connect cart service: %v", err)
 	}
 	CartClient = rpccart.NewCartServiceClient(conn)
 }
 
 func initProductClient() {
-	userAddr := discoverService("product")
-	conn, err := grpc.Dial(userAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	productAddr := discoverService("product")
+	conn, err := grpc.Dial(productAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("Failed to connect user service: %v", err)
+		log.Fatalf("Failed to connect product service: %v", err)
 	}
 	ProductClient = rpcproduct.NewProductServiceClient(conn)
 }

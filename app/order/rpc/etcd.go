@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/FelizYK/gomall/app/checkout/conf"
+	"github.com/FelizYK/gomall/app/order/conf"
 	clientv3 "go.etcd.io/etcd/client/v3"
 )
 

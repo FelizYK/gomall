@@ -1,4 +1,4 @@
-module github.com/FelizYK/gomall/app/checkout
+module github.com/FelizYK/gomall/app/order
 
 go 1.23.5
 

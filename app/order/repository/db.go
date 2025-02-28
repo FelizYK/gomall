@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/FelizYK/gomall/app/checkout/conf"
+	"github.com/FelizYK/gomall/app/order/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -25,5 +25,5 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	DB.AutoMigrate(&Order{})
+	DB.AutoMigrate(&Order{}, &OrderItem{})
 }

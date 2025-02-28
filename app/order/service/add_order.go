@@ -4,14 +4,14 @@ import (
 	"context"
 	"errors"
 
-	"github.com/FelizYK/gomall/app/checkout/repository"
-	"github.com/FelizYK/gomall/app/checkout/rpc"
+	"github.com/FelizYK/gomall/app/order/repository"
+	"github.com/FelizYK/gomall/app/order/rpc"
 	rpccart "github.com/FelizYK/gomall/rpc/cart"
-	rpccheckout "github.com/FelizYK/gomall/rpc/checkout"
+	rpcorder "github.com/FelizYK/gomall/rpc/order"
 	"github.com/FelizYK/gomall/rpc/product"
 )
 
-func Checkout(ctx context.Context, req *rpccheckout.CheckoutReq) (err error) {
+func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 	// get cart_items by user_id
 	cartResp, err := rpc.CartClient.GetCart(ctx, &rpccart.GetCartReq{
 		UserId: req.UserId,

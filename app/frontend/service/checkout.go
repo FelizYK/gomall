@@ -5,7 +5,7 @@ import (
 
 	"github.com/FelizYK/gomall/app/frontend/rpc"
 	"github.com/FelizYK/gomall/app/frontend/rpc/checkout"
-	rpccheckout "github.com/FelizYK/gomall/rpc/checkout"
+	rpcorder "github.com/FelizYK/gomall/rpc/order"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,9 +16,9 @@ func Checkout(c *gin.Context, req *checkout.CheckoutReq) (err error) {
 		return errors.New("user not login")
 	}
 	// call rpc
-	_, err = rpc.CheckoutClient.Checkout(c, &rpccheckout.CheckoutReq{
+	_, err = rpc.OrderClient.AddOrder(c, &rpcorder.AddOrderReq{
 		UserId: userId,
-		Consignee: &rpccheckout.Consignee{
+		Consignee: &rpcorder.Consignee{
 			Email:     req.Email,
 			Firstname: req.Firstname,
 			Lastname:  req.Lastname,
@@ -27,7 +27,7 @@ func Checkout(c *gin.Context, req *checkout.CheckoutReq) (err error) {
 			Province:  req.Province,
 			Country:   req.Country,
 		},
-		CreditCard: &rpccheckout.CreditCard{
+		CreditCard: &rpcorder.CreditCard{
 			CardNum:         req.CardNum,
 			ExpirationYear:  req.ExpirationYear,
 			ExpirationMonth: req.ExpirationMonth,
