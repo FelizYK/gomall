@@ -11,7 +11,7 @@ func GetOrders(c *gin.Context) (map[string]any, error) {
 	// get user_id
 	userId := getUserIdFromSession(c)
 	if userId == 0 {
-		return nil, nil
+		return gin.H{}, nil
 	}
 	// call rpc
 	resp, err := rpc.OrderClient.GetOrders(c, &rpcorder.GetOrdersReq{
@@ -20,10 +20,10 @@ func GetOrders(c *gin.Context) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	if resp == nil || len(resp.Orders) == 0 {
-		return nil, nil
-	}
 	// assemble response
+	if resp == nil || len(resp.Orders) == 0 {
+		return gin.H{}, nil
+	}
 	var orders []map[string]any
 	for _, order := range resp.Orders {
 		var products []map[string]any
@@ -33,9 +33,6 @@ func GetOrders(c *gin.Context) (map[string]any, error) {
 			})
 			if err != nil {
 				return nil, err
-			}
-			if p.Product == nil {
-				continue
 			}
 			products = append(products, gin.H{
 				"name":     p.Product.Name,

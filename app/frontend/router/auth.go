@@ -10,13 +10,13 @@ import (
 func Auth(r *gin.Engine) {
 	// sign up
 	r.GET("/register", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "register.html", nil)
+		ctx.HTML(http.StatusOK, "register.html", gin.H{})
 	})
 	r.POST("/auth/register", handler.Register)
 
 	// sign in
 	r.GET("/login", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "login.html", nil)
+		ctx.HTML(http.StatusOK, "login.html", gin.H{})
 	})
 	r.POST("/auth/login", handler.Login)
 
