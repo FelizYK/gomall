@@ -17,7 +17,7 @@ func GetCart(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "cart.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "cart.html", WrapResponse(c, resp))
 }
 
 // POST /cart

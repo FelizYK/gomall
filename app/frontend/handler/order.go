@@ -16,5 +16,5 @@ func OrderPage(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "order.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "order.html", WrapResponse(c, resp))
 }

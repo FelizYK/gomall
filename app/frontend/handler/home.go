@@ -15,5 +15,5 @@ func Home(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "home.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "home.html", WrapResponse(c, resp))
 }

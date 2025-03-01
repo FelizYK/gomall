@@ -23,7 +23,7 @@ func GetProduct(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "product.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "product.html", WrapResponse(c, resp))
 }
 
 // GET /category/:category
@@ -41,7 +41,7 @@ func ListProductsByCategory(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "category.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "category.html", WrapResponse(c, resp))
 }
 
 // GET /search
@@ -59,5 +59,5 @@ func SearchProducts(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "search.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "search.html", WrapResponse(c, resp))
 }

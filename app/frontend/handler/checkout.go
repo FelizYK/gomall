@@ -17,7 +17,7 @@ func CheckoutPage(c *gin.Context) {
 		return
 	}
 	// render html
-	c.HTML(http.StatusOK, "checkout.html", service.WrapResponse(c, resp))
+	c.HTML(http.StatusOK, "checkout.html", WrapResponse(c, resp))
 }
 
 // POST /checkout
