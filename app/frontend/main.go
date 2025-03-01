@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/FelizYK/gomall/app/frontend/conf"
+	"github.com/FelizYK/gomall/app/frontend/middleware"
 	"github.com/FelizYK/gomall/app/frontend/router"
 	"github.com/FelizYK/gomall/app/frontend/rpc"
 	"github.com/gin-contrib/sessions"
@@ -52,4 +53,6 @@ func registerMiddleware(r *gin.Engine) {
 		MaxAge: 86400,
 	})
 	r.Use(sessions.Sessions("feliz-shop", store))
+	// global auth
+	r.Use(middleware.GlobalAuth())
 }

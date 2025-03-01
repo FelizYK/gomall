@@ -5,14 +5,14 @@ import (
 
 	"github.com/FelizYK/gomall/app/frontend/rpc"
 	rpccart "github.com/FelizYK/gomall/rpc/cart"
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 func WrapResponse(c *gin.Context, resp map[string]any) map[string]any {
 	// user_id
-	userId := GetUserIdFromSession(c)
-	if userId != 0 {
+	userId, exists := c.Get("user_id")
+	if exists {
+		userId := userId.(uint32)
 		resp["user_id"] = userId
 
 		// cart_num
@@ -27,13 +27,4 @@ func WrapResponse(c *gin.Context, resp map[string]any) map[string]any {
 	}
 
 	return resp
-}
-
-func GetUserIdFromSession(c *gin.Context) uint32 {
-	session := sessions.Default(c)
-	userId := session.Get("user_id")
-	if userId == nil {
-		return 0
-	}
-	return userId.(uint32)
 }
