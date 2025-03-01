@@ -1,6 +1,8 @@
 package service
 
 import (
+	"errors"
+
 	"github.com/FelizYK/gomall/app/frontend/rpc"
 	rpcorder "github.com/FelizYK/gomall/rpc/order"
 	rpcproduct "github.com/FelizYK/gomall/rpc/product"
@@ -9,13 +11,13 @@ import (
 
 func GetOrders(c *gin.Context) (map[string]any, error) {
 	// get user_id
-	userId := getUserIdFromSession(c)
-	if userId == 0 {
-		return gin.H{}, nil
+	userId, exists := c.Get("user_id")
+	if !exists {
+		return nil, errors.New("user not login")
 	}
 	// call rpc
 	resp, err := rpc.OrderClient.GetOrders(c, &rpcorder.GetOrdersReq{
-		UserId: userId,
+		UserId: userId.(uint32),
 	})
 	if err != nil {
 		return nil, err

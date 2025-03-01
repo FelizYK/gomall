@@ -11,7 +11,7 @@ import (
 
 func WrapResponse(c *gin.Context, resp map[string]any) map[string]any {
 	// user_id
-	userId := getUserIdFromSession(c)
+	userId := GetUserIdFromSession(c)
 	if userId != 0 {
 		resp["user_id"] = userId
 
@@ -29,7 +29,7 @@ func WrapResponse(c *gin.Context, resp map[string]any) map[string]any {
 	return resp
 }
 
-func getUserIdFromSession(c *gin.Context) uint32 {
+func GetUserIdFromSession(c *gin.Context) uint32 {
 	session := sessions.Default(c)
 	userId := session.Get("user_id")
 	if userId == nil {
