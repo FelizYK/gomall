@@ -10,6 +10,6 @@ func Order(r *gin.Engine) {
 	protected := r.Group("/order", middleware.Auth())
 	{
 		// order
-		protected.GET("/order", handler.OrderPage)
+		protected.GET("/", handler.OrderPage)
 	}
 }

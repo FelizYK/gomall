@@ -10,8 +10,8 @@ func Checkout(r *gin.Engine) {
 	protected := r.Group("/checkout", middleware.Auth())
 	{
 		// checkout
-		protected.GET("/checkout", handler.CheckoutPage)
+		protected.GET("/", handler.CheckoutPage)
 		// pay
-		protected.POST("/checkout", handler.Checkout)
+		protected.POST("/", handler.Checkout)
 	}
 }

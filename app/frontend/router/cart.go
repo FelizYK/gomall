@@ -10,8 +10,8 @@ func Cart(r *gin.Engine) {
 	protected := r.Group("/cart", middleware.Auth())
 	{
 		// cart
-		protected.GET("/cart", handler.GetCart)
+		protected.GET("/", handler.GetCart)
 		// add product to cart
-		protected.POST("/cart", handler.AddCart)
+		protected.POST("/", handler.AddCart)
 	}
 }
