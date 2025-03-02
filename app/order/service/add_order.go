@@ -4,11 +4,14 @@ import (
 	"context"
 	"errors"
 
+	"github.com/FelizYK/gomall/app/order/mq"
 	"github.com/FelizYK/gomall/app/order/repository"
 	"github.com/FelizYK/gomall/app/order/rpc"
 	rpccart "github.com/FelizYK/gomall/rpc/cart"
+	rpcemail "github.com/FelizYK/gomall/rpc/email"
 	rpcorder "github.com/FelizYK/gomall/rpc/order"
 	"github.com/FelizYK/gomall/rpc/product"
+	"google.golang.org/protobuf/proto"
 )
 
 func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
@@ -75,6 +78,20 @@ func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 	_, err = rpc.CartClient.EmptyCart(ctx, &rpccart.EmptyCartReq{
 		UserId: req.UserId,
 	})
+	if err != nil {
+		return
+	}
+	// send email
+	data, err := proto.Marshal(&rpcemail.SendEmailReq{
+		From:    "from@example.cim",
+		To:      req.Consignee.Email,
+		Subject: "Order Confirmation",
+		Body:    "Your order has been confirmed",
+	})
+	if err != nil {
+		return
+	}
+	err = mq.Nc.Publish("email", data)
 	if err != nil {
 		return
 	}

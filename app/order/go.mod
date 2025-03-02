@@ -9,6 +9,7 @@ require (
 	github.com/go-playground/validator/v10 v10.25.0
 	github.com/joho/godotenv v1.5.1
 	github.com/kr/pretty v0.3.1
+	github.com/nats-io/nats.go v1.39.1
 	go.etcd.io/etcd/client/v3 v3.5.18
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
@@ -28,8 +29,11 @@ require (
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/klauspost/compress v1.17.9 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/nats-io/nkeys v0.4.9 // indirect
+	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.18 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.18 // indirect
