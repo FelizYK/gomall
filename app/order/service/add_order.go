@@ -70,7 +70,8 @@ func AddOrder(ctx context.Context, req *rpcorder.AddOrderReq) (err error) {
 		TotalCost:  totalCost,
 		OrderItems: orderItems,
 	}
-	err = repository.AddOrder(ctx, order)
+	q := repository.NewOrderQuery(ctx)
+	err = q.AddOrder(order)
 	if err != nil {
 		return
 	}

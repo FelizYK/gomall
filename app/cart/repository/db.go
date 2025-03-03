@@ -10,14 +10,14 @@ import (
 )
 
 var (
-	DB  *gorm.DB
+	db  *gorm.DB
 	err error
 )
 
 func Init() {
 	// init MySQL
 	dsn := fmt.Sprintf(conf.GetConf().MySQL.DSN, os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_HOST"))
-	DB, err = gorm.Open(mysql.Open(dsn),
+	db, err = gorm.Open(mysql.Open(dsn),
 		&gorm.Config{
 			PrepareStmt: true,
 		},
@@ -25,5 +25,5 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	DB.AutoMigrate(&CartItem{})
+	db.AutoMigrate(&CartItem{})
 }

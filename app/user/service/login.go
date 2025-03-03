@@ -10,7 +10,8 @@ import (
 
 func Login(ctx context.Context, req *rpcuser.LoginReq) (resp *rpcuser.LoginResp, err error) {
 	// get user by email
-	user, err := repository.GetByEmail(ctx, req.Email)
+	q := repository.NewUserQuery(ctx)
+	user, err := q.GetByEmail(req.Email)
 	if err != nil {
 		return
 	}

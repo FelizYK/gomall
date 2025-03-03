@@ -20,20 +20,28 @@ func (u Product) TableName() string {
 	return "product"
 }
 
-func GetProducts(ctx context.Context) (products []Product, err error) {
-	err = DB.WithContext(ctx).Model(&Product{}).
+type ProductQuery struct {
+	ctx context.Context
+}
+
+func NewProductQuery(ctx context.Context) ProductQuery {
+	return ProductQuery{ctx: ctx}
+}
+
+func (q ProductQuery) GetProducts() (products []Product, err error) {
+	err = db.WithContext(q.ctx).Model(&Product{}).
 		Find(&products).Error
 	return
 }
 
-func GetProductById(ctx context.Context, id uint32) (product Product, err error) {
-	err = DB.WithContext(ctx).Model(&Product{}).
+func (q ProductQuery) GetProductById(id uint32) (product Product, err error) {
+	err = db.WithContext(q.ctx).Model(&Product{}).
 		Where("id = ?", id).First(&product).Error
 	return
 }
 
-func SearchProducts(ctx context.Context, query string) (products []Product, err error) {
-	err = DB.WithContext(ctx).Model(&Product{}).
+func (q ProductQuery) SearchProducts(query string) (products []Product, err error) {
+	err = db.WithContext(q.ctx).Model(&Product{}).
 		Where("name LIKE ? or description like ?", "%"+query+"%", "%"+query+"%").Find(&products).Error
 	return
 }

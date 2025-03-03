@@ -19,7 +19,8 @@ func AddCart(ctx context.Context, req *rpccart.AddCartReq) (err error) {
 		return
 	}
 	// add cart_item
-	err = repository.AddCart(ctx, req.UserId, req.Item.ProductId, req.Item.Quantity)
+	q := repository.NewCartQuery(ctx)
+	err = q.AddCart(req.UserId, req.Item.ProductId, req.Item.Quantity)
 	if err != nil {
 		return
 	}

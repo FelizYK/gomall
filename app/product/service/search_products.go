@@ -9,7 +9,8 @@ import (
 
 func SearchProducts(ctx context.Context, req *rpcproduct.SearchProductsReq) (resp *rpcproduct.SearchProductsResp, err error) {
 	// search products
-	products, err := repository.SearchProducts(ctx, req.Query)
+	q := repository.NewProductQuery(ctx)
+	products, err := q.SearchProducts(req.Query)
 	if err != nil {
 		return
 	}

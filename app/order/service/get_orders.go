@@ -9,7 +9,8 @@ import (
 
 func GetOrders(ctx context.Context, req *rpcorder.GetOrdersReq) (resp *rpcorder.GetOrdersResp, err error) {
 	// get orders by user_id
-	orders, err := repository.GetOrders(ctx, req.UserId)
+	q := repository.NewOrderQuery(ctx)
+	orders, err := q.GetOrders(req.UserId)
 	if err != nil {
 		return
 	}

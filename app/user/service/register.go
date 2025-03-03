@@ -25,7 +25,8 @@ func Register(ctx context.Context, req *rpcuser.RegisterReq) (resp *rpcuser.Regi
 		Email:          req.Email,
 		PasswordHashed: string(hashedPassword),
 	}
-	if err = repository.Create(ctx, newUser); err != nil {
+	q := repository.NewUserQuery(ctx)
+	if err = q.Create(newUser); err != nil {
 		return
 	}
 	// assemble response

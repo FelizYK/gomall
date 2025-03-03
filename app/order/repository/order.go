@@ -36,14 +36,22 @@ func (u Order) TableName() string {
 	return "order"
 }
 
-func GetOrders(ctx context.Context, userId uint32) (orders []*Order, err error) {
-	err = DB.WithContext(ctx).Model(&Order{}).
+type OrderQuery struct {
+	ctx context.Context
+}
+
+func NewOrderQuery(ctx context.Context) OrderQuery {
+	return OrderQuery{ctx: ctx}
+}
+
+func (q OrderQuery) GetOrders(userId uint32) (orders []*Order, err error) {
+	err = db.WithContext(q.ctx).Model(&Order{}).
 		Where("user_id = ?", userId).Preload("OrderItems").Find(&orders).Error
 	return
 }
 
-func AddOrder(ctx context.Context, order *Order) (err error) {
-	err = DB.WithContext(ctx).Model(&Order{}).
+func (q OrderQuery) AddOrder(order *Order) (err error) {
+	err = db.WithContext(q.ctx).Model(&Order{}).
 		Create(order).Error
 	return
 }

@@ -10,8 +10,12 @@ import (
 func GetCart(ctx context.Context, req *rpccart.GetCartReq) (resp *rpccart.GetCartResp, err error) {
 	// check user exists
 	err = CheckUser(ctx, req.UserId)
+	if err != nil {
+		return
+	}
 	// get cart_items by user_id
-	items, err := repository.GetCartByUserId(ctx, req.UserId)
+	q := repository.NewCartQuery(ctx)
+	items, err := q.GetCartByUserId(req.UserId)
 	if err != nil {
 		return
 	}

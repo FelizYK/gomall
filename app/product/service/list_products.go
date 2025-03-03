@@ -17,7 +17,8 @@ func ListProducts(ctx context.Context, req *rpcproduct.ListProductsReq) (resp *r
 
 func getProducts(ctx context.Context) (resp *rpcproduct.ListProductsResp, err error) {
 	// get category by name
-	products, err := repository.GetProducts(ctx)
+	q := repository.NewProductQuery(ctx)
+	products, err := q.GetProducts()
 	if err != nil {
 		return
 	}

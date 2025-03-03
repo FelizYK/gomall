@@ -19,7 +19,7 @@ func (u Category) TableName() string {
 }
 
 func GetCategoryByName(ctx context.Context, name string) (category Category, err error) {
-	err = DB.WithContext(ctx).Model(&Category{}).
+	err = db.WithContext(ctx).Model(&Category{}).
 		Where("name = ?", name).Preload("Products").First(&category).Error
 	return
 }

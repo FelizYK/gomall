@@ -9,7 +9,8 @@ import (
 
 func GetUser(ctx context.Context, req *rpcuser.GetUserReq) (resp *rpcuser.GetUserResp, err error) {
 	// get user by id
-	user, err := repository.GetById(ctx, req.Id)
+	q := repository.NewUserQuery(ctx)
+	user, err := q.GetById(req.Id)
 	if err != nil {
 		return
 	}
