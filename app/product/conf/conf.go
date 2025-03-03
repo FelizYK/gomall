@@ -22,6 +22,7 @@ type Config struct {
 	Service Service `yaml:"service"`
 	Etcd    Etcd    `yaml:"etcd"`
 	MySQL   MySQL   `yaml:"mysql"`
+	Redis   Redis   `yaml:"redis"`
 }
 
 type Service struct {
@@ -35,6 +36,13 @@ type Etcd struct {
 
 type MySQL struct {
 	DSN string `yaml:"dsn" validate:"required"`
+}
+
+type Redis struct {
+	Address  string `yaml:"address" validate:"required"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db" validate:"min=0"`
 }
 
 // GetConf gets configuration instance

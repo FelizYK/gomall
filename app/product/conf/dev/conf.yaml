@@ -7,3 +7,9 @@ etcd:
 
 mysql:
   dsn: "%s:%s@tcp(%s:3306)/gomall?charset=utf8mb4&parseTime=True&loc=Local"
+
+redis:
+  address: ":6379"
+  username: ""
+  password: ""
+  db: 0

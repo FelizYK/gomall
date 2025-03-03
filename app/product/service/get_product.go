@@ -14,7 +14,8 @@ func GetProduct(ctx context.Context, req *rpcproduct.GetProductReq) (resp *rpcpr
 		return nil, errors.New("product id is required")
 	}
 	// get product by id
-	q := repository.NewProductQuery(ctx)
+	// q := repository.NewProductQuery(ctx)
+	q := repository.NewCachedProductQuery(repository.NewProductQuery(ctx))
 	product, err := q.GetProductById(req.Id)
 	if err != nil {
 		return
