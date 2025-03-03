@@ -34,7 +34,7 @@ func CloseEtcd() {
 
 func registerService() {
 	// grant lease
-	ctx := context.TODO()
+	ctx := context.Background()
 	lease, err := cli.Grant(ctx, 30)
 	if err != nil {
 		log.Fatalf("Failed to create lease: %v", err)

@@ -31,7 +31,7 @@ func CloseEtcd() {
 }
 
 func DiscoverService(serviceName string) (serviceAddr string) {
-	resp, err := cli.Get(context.TODO(), serviceName, clientv3.WithPrefix())
+	resp, err := cli.Get(context.Background(), serviceName, clientv3.WithPrefix())
 	if err != nil {
 		log.Fatalf("Failed to get service address: %v", err)
 	}
