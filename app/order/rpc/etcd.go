@@ -34,13 +34,29 @@ func CloseEtcd() {
 }
 
 func registerService() {
-	lease, err := cli.Grant(context.TODO(), 1000)
+	// grant lease
+	ctx := context.TODO()
+	lease, err := cli.Grant(ctx, 30)
 	if err != nil {
 		log.Fatalf("Failed to create lease: %v", err)
 	}
-	if _, err = cli.Put(context.TODO(), conf.GetConf().Service.Name, conf.GetConf().Service.Address, clientv3.WithLease(lease.ID)); err != nil {
+	// register service
+	serviceName := conf.GetConf().Service.Name
+	serviceAddress := conf.GetConf().Service.Address
+	_, err = cli.Put(ctx, serviceName, serviceAddress, clientv3.WithLease(lease.ID))
+	if err != nil {
 		log.Fatalf("Failed to register service: %v", err)
 	}
+	// keep alive lease
+	keepAliveChan, err := cli.KeepAlive(ctx, lease.ID)
+	if err != nil {
+		log.Fatalf("Failed to keep alive lease: %v", err)
+	}
+	go func() {
+		for {
+			<-keepAliveChan
+		}
+	}()
 }
 
 func discoverService(serviceName string) (serviceAddr string) {
